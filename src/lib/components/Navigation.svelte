@@ -1,8 +1,40 @@
 <script>
 	import { page } from "$app/stores";
+	import Close from "$lib/components/Icon/Close.svelte";
+	import Hamburger from "$lib/components/Icon/Hamburger.svelte";
+
+	let isNavOpen = false;
 </script>
 
-<header class="col-span-3 bg-daisyBush pt-12 text-center">
+<svelte:head>
+	{#if isNavOpen}
+		<style lang="postcss">
+			body {
+				@apply overflow-hidden md:overflow-auto;
+			}
+		</style>
+	{/if}
+</svelte:head>
+
+<button
+	class="fixed right-6 top-6 z-navToggle md:hidden"
+	class:text-goldenFizz={isNavOpen}
+	class:text-daisyBush={!isNavOpen}
+	on:click={() => {
+		isNavOpen = !isNavOpen;
+	}}
+>
+	{#if isNavOpen}
+		<Close width={32} height={32} />
+	{:else}
+		<Hamburger width={32} height={32} />
+	{/if}
+</button>
+
+<header
+	class="fixed z-nav h-screen w-full -translate-x-full bg-daisyBush pt-12 text-center transition-transform md:relative md:col-span-3 md:h-full md:translate-x-0"
+	class:translate-x-0={isNavOpen}
+>
 	<div>
 		<a href="/invoices">
 			<img src="/images/logo.svg" alt="The Dollar Holler" class="mx-auto" />

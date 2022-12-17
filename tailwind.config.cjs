@@ -24,6 +24,10 @@ module.exports = {
 				gallery: "#efeaf2",
 				caribbeanGreen: "#00ca9e",
 				fog: "#decaec"
+			},
+			zIndex: {
+				navToggle: 20,
+				nav: 10
 			}
 		}
 	},
