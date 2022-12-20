@@ -1,6 +1,6 @@
 <script lang="ts">
 	export let label: string;
-	export let variant: "inverted" | "success" | "alert" | "archive";
+	export let variant: "inverted" | "success" | "alert" | "archived";
 </script>
 
 <div
@@ -22,7 +22,7 @@
 		@apply border-scarlet bg-scarlet text-goldenFizz;
 	}
 
-	.archive {
+	.archived {
 		@apply border-pastelPurple bg-pastelPurple text-white;
 	}
 </style>
