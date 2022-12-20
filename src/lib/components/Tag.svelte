@@ -1,6 +1,8 @@
 <script lang="ts">
+	import type { TagVariant } from "$lib/types";
+
 	export let label: string;
-	export let variant: "inverted" | "success" | "alert" | "archived";
+	export let variant: TagVariant;
 </script>
 
 <div

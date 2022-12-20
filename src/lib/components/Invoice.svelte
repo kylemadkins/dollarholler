@@ -2,6 +2,7 @@
 	import Tag from "$lib/components/Tag.svelte";
 	import View from "$lib/components/Icon/View.svelte";
 	import ThreeDots from "$lib/components/Icon/ThreeDots.svelte";
+	import { type TagVariant, INVOICE_STATUS, type InvoiceStatus } from "$lib/types";
 
 	export let status: InvoiceStatus;
 	export let dueDate: string;
@@ -10,10 +11,10 @@
 	export let amount: number;
 
 	let variant = {
-		draft: "inverted",
-		sent: "success",
-		paid: "archived"
-	}[status] as "inverted" | "success" | "archived";
+		[INVOICE_STATUS.DRAFT]: "inverted",
+		[INVOICE_STATUS.SENT]: "success",
+		[INVOICE_STATUS.PAID]: "archived"
+	}[status] as TagVariant;
 
 	const formatter = new Intl.NumberFormat("en-US", {
 		style: "currency",
