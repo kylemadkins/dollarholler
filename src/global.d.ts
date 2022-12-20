@@ -1,10 +1,11 @@
-const InvoiceStatus = {
-	Draft: "Draft",
-	Sent: "Sent",
-	Paid: "Paid"
-} as const;
+type InvoiceStatus = "draft" | "sent" | "paid";
 
-type InvoiceStatus = typeof InvoiceStatus[keyof typeof InvoiceStatus];
+type LineItem = {
+	id: string;
+	description: string;
+	quantity: number;
+	amount: number;
+};
 
 type Invoice = {
 	id: string;
@@ -20,12 +21,7 @@ type Invoice = {
 	createdAt: string;
 };
 
-const ClientStatus = {
-	Active: "Active",
-	Archived: "Archived"
-} as const;
-
-type ClientStatus = typeof ClientStatus[keyof typeof ClientStatus];
+type ClientStatus = "active" | "archived";
 
 type Client = {
 	id: string;
@@ -35,12 +31,5 @@ type Client = {
 	city: string;
 	state: string;
 	zip: string;
-	status: ClientStatus;
-};
-
-type LineItem = {
-	id: string;
-	description: string;
-	quantity: number;
-	amount: number;
+	status?: ClientStatus;
 };

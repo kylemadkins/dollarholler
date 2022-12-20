@@ -1,9 +1,13 @@
 <script lang="ts">
+	import { onMount } from "svelte";
+	import { invoices, loadInvoices } from "$lib/stores/InvoiceStore";
 	import Search from "$lib/components/Search.svelte";
-	import Tag from "$lib/components/Tag.svelte";
-	import View from "$lib/components/Icon/View.svelte";
-	import ThreeDots from "$lib/components/Icon/ThreeDots.svelte";
 	import CircledAmount from "$lib/components/CircledAmount.svelte";
+	import Invoice from "$lib/components/Invoice.svelte";
+
+	onMount(() => {
+		loadInvoices();
+	});
 </script>
 
 <svelte:head>
@@ -33,21 +37,18 @@
 		<div />
 	</div>
 
-	<div
-		class="invoice-table invoice-row items-center rounded-lg bg-white py-3 shadow-tableRow lg:py-6"
-	>
-		<div class="status"><Tag label="Draft" variant="inverted" class="ml-auto lg:ml-0" /></div>
-		<div class="due-date text-sm lg:text-lg">8/1/2022</div>
-		<div class="invoice-number text-sm lg:text-lg">12345</div>
-		<div class="client-name text-base font-bold lg:text-xl">Compressed.fm</div>
-		<div class="amount text-right font-mono text-sm font-bold lg:text-lg">$504.00</div>
-		<div class="view-button lg:center hidden text-sm lg:text-lg">
-			<a href="/" class="text-pastelPurple hover:text-daisyBush"><View /></a>
-		</div>
-		<div class="more-button lg:center hidden text-sm lg:text-lg">
-			<button class="text-pastelPurple hover:text-daisyBush"><ThreeDots /></button>
-		</div>
-	</div>
+	{#each $invoices as invoice}
+		<Invoice
+			status={invoice.status}
+			dueDate={invoice.dueDate}
+			number={invoice.number}
+			clientName={invoice.client.name}
+			amount={invoice.lineItems?.reduce(
+				(amount, lineItem) => amount + lineItem.quantity * lineItem.amount,
+				0
+			) ?? 0}
+		/>
+	{/each}
 </div>
 
 <div>
@@ -57,46 +58,5 @@
 <style lang="postcss">
 	.table-header h3 {
 		@apply text-xl font-black leading-snug;
-	}
-
-	.invoice-row {
-		grid-template-areas:
-			"invoice-number invoice-number"
-			"client-name amount"
-			"due-date status";
-	}
-
-	@media (min-width: 1024px) {
-		.invoice-row {
-			grid-template-areas: "status due-date invoice-number client-name amount view-button more-button";
-		}
-	}
-
-	.invoice-row .status {
-		grid-area: status;
-	}
-
-	.invoice-row .due-date {
-		grid-area: due-date;
-	}
-
-	.invoice-row .invoice-number {
-		grid-area: invoice-number;
-	}
-
-	.invoice-row .client-name {
-		grid-area: client-name;
-	}
-
-	.invoice-row .amount {
-		grid-area: amount;
-	}
-
-	.invoice-row .view-button {
-		grid-area: view-button;
-	}
-
-	.invoice-row .more-button {
-		grid-area: more-button;
 	}
 </style>
