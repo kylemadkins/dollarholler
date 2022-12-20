@@ -4,7 +4,7 @@
 </script>
 
 <div
-	class={`text-md w-20 rounded-full border-1 border-pastelPurple text-center font-bold capitalize text-pastelPurple ${variant}`}
+	class={`text-md w-20 rounded-full border-1 border-pastelPurple text-center font-bold capitalize text-pastelPurple ${variant} ${$$props.class}`}
 >
 	{label}
 </div>
