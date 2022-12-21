@@ -1,19 +1,6 @@
-export const TAG_VARIANT = {
-	INVERTED: "inverted",
-	SUCCESS: "success",
-	ALERT: "alert",
-	ARCHIVED: "archived"
-} as const;
+export type TagVariant = "inverted" | "success" | "alert" | "archived";
 
-export type TagVariant = typeof TAG_VARIANT[keyof typeof TAG_VARIANT];
-
-export const INVOICE_STATUS = {
-	DRAFT: "draft",
-	SENT: "sent",
-	PAID: "paid"
-} as const;
-
-export type InvoiceStatus = typeof INVOICE_STATUS[keyof typeof INVOICE_STATUS];
+export type InvoiceStatus = "draft" | "sent" | "paid";
 
 export type LineItem = {
 	id: string;
@@ -36,12 +23,7 @@ export type Invoice = {
 	createdAt: string;
 };
 
-export const CLIENT_STATUS = {
-	ACTIVE: "active",
-	ARCHIVED: "archived"
-} as const;
-
-export type ClientStatus = typeof CLIENT_STATUS[keyof typeof CLIENT_STATUS];
+export type ClientStatus = "active" | "archived";
 
 export type Client = {
 	id: string;
